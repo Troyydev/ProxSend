@@ -6,7 +6,7 @@
     <title>POST Request Example</title>
 </head>
 <body>
-    <!-- Add input fields for client_mutation_id and __req -->
+    <!-- Add a button to trigger the POST request -->
     <label for="clientMutationId">Client Mutation ID:</label>
     <input type="text" id="clientMutationId" value="6"><br>
     <label for="__req">__req:</label>
@@ -33,18 +33,20 @@
                     link_nonce: null
                 }
             };
-        
+
             var queryString = `av=&__user=0&__a=1&__req=${encodeURIComponent(req)}&__hs=19814.HYP%3Adolly_pkg.2.1..0.0&dpr=1.5&__ccg=EXCELLENT&__rev=1012446745&__s=cz6hwt%3Aon07hb%3Abkyxin&__hsi=7353025341543300373&__dyn=7xeUmwlEnwn8K2Wmh0cm5U4e0yoW3q32360CEbo1nEhw2nVE4W0om782Cw8G1Dz82bwei4o5-0Bo7O2l0Fwqo31w9O7U4-3OfK15wnojwGzE2swwwNwKx26E2eU5O1ZwNx_wfe3u2S3qazo4i0Io-1Ewl8fUbUjwzwNwLwZwWxK32221wyUkwMxWjg5i0z8vwCyU8888rG36dw&__csr=gh8rkGXHbpiFqvTKqgF4AdiiyrGGgzRAipknG9gLyZyFqbBz8iBG7HCyodU01zC8iU9o5a05kpk0SXbg3mc582pghwaPe1hCP0qo2r8-qbCwQw&__comet_req=18&fb_dtsg=NAcPmTdWIHUpZ7irtdKhePMS4rqWrngku6rNGoN7sH35KBsZICywXqw%3A4%3A1705248766&jazoest=25653&lsd=RrcIWNrb-AxOqH4T_75vKl&__spin_r=1012446745&__spin_b=trunk&__spin_t=1712009623&__jssesw=1&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=OCRemoteLaunchQueueLaunchMutation&variables=${encodeURIComponent(JSON.stringify(variables))}&server_timestamps=true&doc_id=5001186433260971`;
 
             // Create a new XMLHttpRequest object
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "https://cors-anywhere.herokuapp.com/https://www.meta.com/ocapi/graphql?forced_locale=en_GB", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("Origin", "https://troyydev.github.io/ProxSend/"); // Replace YOUR_ORIGIN_HERE with your actual origin
 
             // Set up the event listener for when the request is complete
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     // Request was successful
+                    console.log('Response:', xhr.responseText);
                     document.getElementById("responseContainer").innerText = xhr.responseText;
                 } else {
                     // Request failed
