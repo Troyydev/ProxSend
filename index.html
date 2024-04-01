@@ -13,40 +13,41 @@
     <div id="responseContainer"></div>
 
     <script>
-        // Define the GraphQL query (if needed)
-        // var graphqlQuery = `{ ... }`;
-
         // Function to handle the button click event
         function sendPostRequest() {
+            // Define the GraphQL query (if needed)
+            var graphqlQuery = `
+                {
+                    exampleQuery {
+                        field1
+                        field2
+                    }
+                }
+            `;
+
             // Create a new XMLHttpRequest object
-               var xhr1 = new XMLHttpRequest();
-xhr1.open("POST", "https://www.meta.com/ocapi/graphql?forced_locale=en_GB", true);
-xhr1.setRequestHeader("accept", "*/*");
-xhr1.setRequestHeader("accept-language", "en-US,en;q=0.9,da;q=0.8");
-xhr1.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-xhr1.setRequestHeader("cookie", "mu=FryJq9TSjjMWCBgOTEtaT2NZRkVLMjJ2b2cW%2FJ%2Bg2gwA; datr=cFfeZeSBKxlQ9LCXsWuTTpYe; locale=en_GB");
-xhr1.setRequestHeader("dpr", "1.25");
-xhr1.setRequestHeader("origin", "https://www.meta.com");
-xhr1.setRequestHeader("referer", "https://www.meta.com/en-gb/experiences/6481856695179055/");
-xhr1.setRequestHeader("sec-ch-prefers-color-scheme", "light");
-xhr1.setRequestHeader("sec-ch-ua", "\"Microsoft Edge\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"");
-xhr1.setRequestHeader("sec-ch-ua-full-version-list", "\"Microsoft Edge\";v=\"123.0.2420.65\", \"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"123.0.6312.87\"");
-xhr1.setRequestHeader("sec-ch-ua-mobile", "?0");
-xhr1.setRequestHeader("sec-ch-ua-model", "\"\"");
-xhr1.setRequestHeader("sec-ch-ua-platform", "Windows");
-xhr1.setRequestHeader("sec-ch-ua-platform-version", "10.0.0");
-xhr1.setRequestHeader("sec-fetch-dest", "empty");
-xhr1.setRequestHeader("sec-fetch-mode", "cors");
-xhr1.setRequestHeader("sec-fetch-site", "same-origin");
-xhr1.setRequestHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0");
-xhr1.setRequestHeader("viewport-width", "727");
-xhr1.setRequestHeader("x-asbd-id", "129477");
-xhr1.setRequestHeader("x-fb-friendly-name", "OCRemoteLaunchQueueLaunchMutation");
-xhr1.setRequestHeader("x-fb-lsd", "RrcIWNrb-AxOqH4T_75vKl");
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://cors-anywhere.herokuapp.com/https://www.meta.com/ocapi/graphql?forced_locale=en_GB", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
 
-var data1 = "av=&__user=0&__a=1&__req=o&__hs=19814.HYP%3Adolly_pkg.2.1..0.0&dpr=1.5&__ccg=EXCELLENT&__rev=1012446745&__s=cz6hwt%3Aon07hb%3Abkyxin&__hsi=7353025341543300373&__dyn=7xeUmwlEnwn8K2Wmh0cm5U4e0yoW3q32360CEbo1nEhw2nVE4W0om782Cw8G1Dz82bwei4o5-0Bo7O2l0Fwqo31w9O7U4-3OfK15wnojwGzE2swwwNwKx26E2eU5O1ZwNx_wfe3u2S3qazo4i0Io-1Ewl8fUbUjwzwNwLwZwWxK32221wyUkwMxWjg5i0z8vwCyU8888rG36dw&__csr=gh8rkGXHbpiFqvTKqgF4AdiiyrGGgzRAipknG9gLyZyFqbBz8iBG7HCyodU01zC8iU9o5a05kpk0SXbg3mc582pghwaPe1hCP0qo2r8-qbCwQw&__comet_req=18&fb_dtsg=NAcPmTdWIHUpZ7irtdKhePMS4rqWrngku6rNGoN7sH35KBsZICywXqw%3A4%3A1705248766&jazoest=25653&lsd=RrcIWNrb-AxOqH4T_75vKl&__spin_r=1012446745&__spin_b=trunk&__spin_t=1712009623&__jssesw=1&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=OCRemoteLaunchQueueLaunchMutation&variables=%7B%22input%22%3A%7B%22client_mutation_id%22%3A%222%22%2C%22app_id%22%3A%221317831034909742%22%2C%22deeplink_target_id%22%3A%226481856695179055%22%2C%22device_serial%22%3A%222G0YC5ZF7X02ZS%22%2C%22request_id%22%3Anull%2C%22link_nonce%22%3Anull%7D%7D&server_timestamps=true&doc_id=5001186433260971";
+            // Set up the event listener for when the request is complete
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Request was successful
+                    document.getElementById("responseContainer").innerText = xhr.responseText;
+                } else {
+                    // Request failed
+                    console.error('Request failed with status:', xhr.status);
+                }
+            };
 
-xhr1.send(data1);
+            // Set up the event listener for when an error occurs during the request
+            xhr.onerror = function() {
+                console.error('Request failed');
+            };
+
+            // Send the request with the GraphQL query as the request body
+            xhr.send(JSON.stringify({ query: graphqlQuery }));
         }
 
         // Add event listener to the button
