@@ -7,7 +7,7 @@
 </head>
 <body>
     <!-- Add a button to trigger the POST request -->
-    <label for="clientMutationId">Client Mutation ID:</label>
+     <label for="clientMutationId">Client Mutation ID:</label>
     <input type="text" id="clientMutationId" value="6"><br>
     <label for="__req">__req:</label>
     <input type="text" id="__req" value="q"><br>
@@ -20,7 +20,7 @@
         // Function to handle the button click event
         function sendPostRequest() {
             // Define the GraphQL query (if needed)
-            var clientMutationId = document.getElementById("clientMutationId").value;
+              var clientMutationId = document.getElementById("clientMutationId").value;
             var req = document.getElementById("__req").value;
 
             var variables = {
@@ -40,17 +40,17 @@
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "https://cors-anywhere.herokuapp.com/https://www.meta.com/ocapi/graphql?forced_locale=en_GB", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.setRequestHeader("Origin", "https://troyydev.github.io/ProxSend/"); // Replace YOUR_ORIGIN_HERE with your actual origin
 
             // Set up the event listener for when the request is complete
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     // Request was successful
-                    console.log('Response:', xhr.responseText);
+                    console.log('Success:', xhr.responseText);
                     document.getElementById("responseContainer").innerText = xhr.responseText;
                 } else {
                     // Request failed
                     console.error('Request failed with status:', xhr.status);
+                    console.error('Error response:', xhr.responseText);
                 }
             };
 
