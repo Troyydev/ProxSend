@@ -1,0 +1,8 @@
+KEYREG("GUI")
+KEYREG("R")
+WAIT(1)
+WRITE("notepad")
+KEYREG("ENTER")
+WAIT(1)
+WRITE("Hello from TTRS!")
+KEYREG("ENTER")
